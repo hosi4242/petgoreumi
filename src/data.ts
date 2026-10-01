@@ -5,7 +5,7 @@ export const products: Product[] = [
  {name:'강아지 하네스+리드줄 세트 조절식 당김방지 탈출방지',pet:'강아지',category:'산책',desc:'산책 시 착용감과 조절 범위, 리드줄 포함 여부를 확인하세요.',tags:['산책','하네스','리드줄'],affiliateUrl:'https://link.coupang.com/a/huTkuo6rro'},
  {name:'강아지 이동장·캐리어',pet:'강아지',category:'외출',desc:'반려견의 크기에 맞는 내부 공간과 통풍, 휴대성을 확인하세요.',tags:['이동','여행','캐리어'],affiliateUrl:'https://link.coupang.com/a/huTnroG08O'},
  {name:'강아지 급수기 500ML',pet:'강아지',category:'급식',desc:'외출 중 물을 급여하기 편한 휴대용 급수기입니다.',tags:['급수','외출','휴대'],affiliateUrl:'https://link.coupang.com/a/huTslaI2gK'},
- {name:'강아지 노즈워크 장난감 15cm',pet:'강아지',category:'놀이·생활',desc:'노즈워크와 놀이를 함께 할 수 있는 장난감입니다.',tags:['노즈워크','놀이','IQ'],affiliateUrl:'https://link.coupang.com/a/huTvbCr0Am'},
+ {name:'강아지 노즈워크 장난감 60cm',pet:'강아지',category:'놀이·생활',desc:'60cm 크기의 노즈워크 매트로 후각 놀이와 간식 찾기 활동에 활용할 수 있습니다.',tags:['노즈워크','놀이','IQ'],affiliateUrl:'https://link.coupang.com/a/huTvbCr0Am'},
  {name:'탐사 고양이 두부모래 7L',pet:'고양이',category:'화장실',desc:'응고형 두부모래로 고양이 화장실 관리에 사용할 수 있습니다.',tags:['두부모래','응고형','화장실'],affiliateUrl:'https://link.coupang.com/a/huTyf6IhwG'},
  {name:'네이처펫 고양이 시그니처 숨숨집 스크래처',pet:'고양이',category:'놀이·생활',desc:'스크래칭과 휴식을 함께 고려할 수 있는 숨숨집형 스크래처입니다.',tags:['스크래처','숨숨집','놀이'],affiliateUrl:'https://link.coupang.com/a/huTBjZDpsa'},
  {name:'고양이 강아지 옥희독희 튼튼백 이동장',pet:'고양이',category:'외출',desc:'외출과 이동 시 반려동물의 크기와 최대 하중을 확인해 선택하세요.',tags:['이동장','외출','캐리어'],affiliateUrl:'https://link.coupang.com/a/huTDVSXtgO'},
