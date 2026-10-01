@@ -1,12 +1,16 @@
 export type Pet = '강아지' | '고양이'
-export type Product = {name:string; pet:Pet; category:string; desc:string; tags:string[]}
+export type Product = {name:string; pet:Pet; category:string; desc:string; tags:string[]; priceRange?:string}
 export const products: Product[] = [
- {name:'강아지 배변패드',pet:'강아지',category:'배변·위생',desc:'흡수력과 크기, 두께를 중심으로 비교해보세요.',tags:['배변','초보 보호자']},
- {name:'강아지 산책용품',pet:'강아지',category:'산책',desc:'목줄·하네스·리드줄을 용도에 맞게 선택하세요.',tags:['산책','외출']},
- {name:'강아지 이동장',pet:'강아지',category:'외출',desc:'크기와 통풍, 휴대성을 먼저 확인하세요.',tags:['이동','여행']},
- {name:'고양이 모래',pet:'고양이',category:'화장실',desc:'응고형·흡수형·두부모래 등의 특징을 비교해보세요.',tags:['화장실','냄새']},
- {name:'고양이 스크래처',pet:'고양이',category:'놀이·생활',desc:'설치 공간과 소재, 안정성을 기준으로 골라보세요.',tags:['스크래처','집']},
- {name:'고양이 이동장',pet:'고양이',category:'외출',desc:'입구 구조와 통풍, 세척 편의성을 살펴보세요.',tags:['이동','병원']}
+ {name:'강아지 배변패드',pet:'강아지',category:'배변·위생',desc:'흡수력과 크기, 두께를 중심으로 비교해보세요.',tags:['배변','초보 보호자'],priceRange:'가격대 비교 예정'},
+ {name:'강아지 산책용품',pet:'강아지',category:'산책',desc:'목줄·하네스·리드줄을 용도에 맞게 선택하세요.',tags:['산책','외출'],priceRange:'가격대 비교 예정'},
+ {name:'강아지 이동장',pet:'강아지',category:'외출',desc:'크기와 통풍, 휴대성을 먼저 확인하세요.',tags:['이동','여행'],priceRange:'가격대 비교 예정'},
+ {name:'강아지 급수기',pet:'강아지',category:'급식',desc:'물 섭취량과 세척 편의성, 외출 여부를 함께 고려하세요.',tags:['급수','관리'],priceRange:'가격대 비교 예정'},
+ {name:'강아지 장난감',pet:'강아지',category:'놀이·생활',desc:'크기와 내구성, 반려견의 놀이 습관을 확인하세요.',tags:['놀이','내구성'],priceRange:'가격대 비교 예정'},
+ {name:'고양이 모래',pet:'고양이',category:'화장실',desc:'응고형·흡수형·두부모래 등의 특징을 비교해보세요.',tags:['화장실','냄새'],priceRange:'가격대 비교 예정'},
+ {name:'고양이 스크래처',pet:'고양이',category:'놀이·생활',desc:'설치 공간과 소재, 안정성을 기준으로 골라보세요.',tags:['스크래처','집'],priceRange:'가격대 비교 예정'},
+ {name:'고양이 이동장',pet:'고양이',category:'외출',desc:'입구 구조와 통풍, 세척 편의성을 살펴보세요.',tags:['이동','병원'],priceRange:'가격대 비교 예정'},
+ {name:'고양이 급수기',pet:'고양이',category:'급식',desc:'용량과 세척, 필터 관리 방식 등을 확인하세요.',tags:['급수','관리'],priceRange:'가격대 비교 예정'},
+ {name:'고양이 화장실',pet:'고양이',category:'화장실',desc:'크기와 입구 높이, 청소 편의성을 함께 살펴보세요.',tags:['화장실','청소'],priceRange:'가격대 비교 예정'}
 ]
 export const situations = [
  ['초보 보호자','처음 준비하는 필수 용품','처음 반려동물을 맞이했다면 꼭 필요한 품목부터 확인하세요.'],
