@@ -14,9 +14,9 @@ function Header({tab,setTab}:{tab:Tab;setTab:(t:Tab)=>void}) {
  </div></header>
 }
 
-function AffiliateNotice(){return <div className="notice">※ 펫고르미는 상품 선택에 도움이 되는 정보를 제공하며, 향후 쿠팡 파트너스 등 제휴 링크가 연결될 수 있습니다. 제휴 링크를 통한 구매가 발생하면 펫고르미에 일정 수수료가 지급될 수 있습니다.</div>}
+function AffiliateNotice(){return <div className="notice">※ 펫고르미는 상품 선택에 도움이 되는 정보를 제공하며, 쿠팡 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.</div>}
 
-function ProductCard({p,onCompare}:{p:typeof products[number];onCompare?:()=>void}){return <article className="product-card">{p.imageUrl?<img className="product-image" src={p.imageUrl} alt={p.name}/>:<div className="product-icon">{p.pet==='강아지'?<Dog/>:<Cat/>}</div>}<div><span className="eyebrow">{p.pet} · {p.category}</span><h3>{p.name}</h3><p>{p.desc}</p><div className="tags">{p.tags.map(t=><span key={t}>{t}</span>)}</div>{p.affiliateUrl?<a className="text-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer">쿠팡에서 확인하기 <ExternalLink size={15}/></a>:<button className="text-link" onClick={onCompare}>상품 정보 보기 <ArrowRight size={15}/></button>}</div></article>}
+function ProductCard({p,onCompare}:{p:typeof products[number];onCompare?:()=>void}){return <article className="product-card">{p.imageUrl?(p.affiliateUrl?<a className="product-image-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer"><img className="product-image" src={p.imageUrl} alt={p.name}/></a>:<img className="product-image" src={p.imageUrl} alt={p.name}/>):<div className="product-icon">{p.pet==='강아지'?<Dog/>:<Cat/>}</div>}<div><span className="eyebrow">{p.pet} · {p.category}</span><h3>{p.name}</h3><p>{p.desc}</p><div className="tags">{p.tags.map(t=><span key={t}>{t}</span>)}</div>{p.affiliateUrl?<a className="text-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer">쿠팡에서 바로 보기 <ExternalLink size={15}/></a>:<button className="text-link" onClick={onCompare}>상품 정보 보기 <ArrowRight size={15}/></button>}</div></article>}
 
 function Home({go}:{go:(t:Tab)=>void}){const [search,setSearch]=useState('');return <main>
  <section className="hero"><div className="hero-copy"><span className="pill">반려생활 선택 가이드</span><h1>우리 아이에게 필요한 것을<br/><em>더 쉽게</em> 골라보세요</h1><p>강아지와 고양이 용품을 조건별로 살펴보고<br/>나에게 맞는 상품을 찾아보세요.</p>
