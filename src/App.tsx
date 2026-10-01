@@ -10,7 +10,8 @@ function Header({tab,setTab}:{tab:Tab;setTab:(t:Tab)=>void}) {
  return <header className="header"><div className="header-inner">
   <button className="logo" onClick={()=>{setTab('홈');setOpen(false)}}><span>펫</span>고르미</button>
   <button className="mobile-menu" onClick={()=>setOpen(!open)} aria-label="메뉴">{open?<X/>:<Menu/>}</button>
-  <nav className={open?'nav open':'nav'}>{nav.map(n=><button key={n} className={tab===n?'active':''} onClick={()=>{setTab(n);setOpen(false)}}>{n}</button>)}</nav>
+  <nav className={open?'nav open':'nav'}>{nav.map(n=><button key={n} className={tab===n?'active':''} onClick={()=>{setTab(n);setOpen(false)}}>{n}</button>)}<
+av>
  </div></header>
 }
 
