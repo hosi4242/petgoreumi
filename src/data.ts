@@ -1,7 +1,7 @@
 export type Pet = '강아지' | '고양이'
 export type Product = {name:string; pet:Pet; category:string; desc:string; tags:string[]; priceRange?:string; affiliateUrl?:string; imageUrl?:string}
 export const products: Product[] = [
- {name:'강아지 배변패드 고흡수 탈취 애견패드, 1개, 32개입',pet:'강아지',category:'배변·위생',desc:'고흡수와 탈취 기능을 갖춘 강아지 배변패드입니다.',tags:['배변','고흡수','탈취'],priceRange:'상품 페이지에서 확인',affiliateUrl:'https://link.coupang.com/a/huRifkzAKO',imageUrl:'https://image7.coupangcdn.com/image/affiliate/banner/d9ed8d6119f9476f3e9f082ea78608e7@2x.jpg'},
+ {name:'강아지 배변패드 고흡수 탈취 애견패드, 1개, 32개입',pet:'강아지',category:'배변·위생',desc:'고흡수와 탈취 기능을 갖춘 강아지 배변패드입니다.',tags:['배변','고흡수','탈취'],priceRange:'상품 페이지에서 확인',affiliateUrl:'https://coupa.ng/cpSex0',imageUrl:'https://image7.coupangcdn.com/image/affiliate/banner/d9ed8d6119f9476f3e9f082ea78608e7@2x.jpg'},
  {name:'강아지 산책용품',pet:'강아지',category:'산책',desc:'목줄·하네스·리드줄을 용도에 맞게 선택하세요.',tags:['산책','외출'],priceRange:'가격대 비교 예정'},
  {name:'강아지 이동장',pet:'강아지',category:'외출',desc:'크기와 통풍, 휴대성을 먼저 확인하세요.',tags:['이동','여행'],priceRange:'가격대 비교 예정'},
  {name:'강아지 급수기',pet:'강아지',category:'급식',desc:'물 섭취량과 세척 편의성, 외출 여부를 함께 고려하세요.',tags:['급수','관리'],priceRange:'가격대 비교 예정'},
