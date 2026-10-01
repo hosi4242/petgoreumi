@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Search, Dog, Cat, ArrowRight, Check, ExternalLink, Menu, X, ChevronLeft } from 'lucide-react'
 import { products, situations, guides } from './data'
 
@@ -44,4 +44,17 @@ function InfoPage({tab,setTab}:{tab:Tab;setTab:(t:Tab)=>void}){const data:Record
  '제휴 안내':{title:'제휴 안내',body:['펫고르미는 반려동물 용품에 관한 정보와 비교 콘텐츠를 제공하고 제휴 링크를 통해 수익을 얻을 수 있는 구조로 운영됩니다.','제휴 링크가 연결된 페이지에는 제휴 사실을 알아보기 쉽게 표시할 예정입니다.','현재 상품별 실제 제휴 링크는 쿠팡 파트너스 등록 및 채널 승인이 완료된 뒤 연결합니다.']}
 };const d=data[tab];return <main className="page info-page"><button className="back-link" onClick={()=>setTab('홈')}><ChevronLeft size={17}/> 홈으로 돌아가기</button><div className="page-title"><span className="section-kicker">PETGOREUMI</span><h1>{d.title}</h1></div><div className="info-card">{d.body.map((x,i)=><p key={i}>{x}</p>)}</div></main>}
 
-export default function App(){const [tab,setTab]=useState<Tab>('홈');const go=(t:Tab)=>setTab(t);let content:ReactNode=<Home go={go}/>;if(tab==='강아지')content=<Listing pet="강아지"/>;if(tab==='고양이')content=<Listing pet="고양이"/>;if(tab==='상황별 추천')content=<Situations/>;if(tab==='상품 비교')content=<Compare/>;if(tab==='반려생활 정보')content=<Guides/>;if(['사이트 소개','이용 안내','개인정보 처리방침','이용약관','문의하기','제휴 안내'].includes(tab))content=<InfoPage tab={tab} setTab={setTab}/>;return <><Header tab={tab} setTab={setTab}/>{content}<footer><div className="footer-inner"><div><button className="logo footer-logo" onClick={()=>setTab('홈')}><span>펫</span>고르미</button><p>우리 아이에게 필요한 것을<br/>더 쉽게 고르는 곳</p></div><div className="footer-links">{(['사이트 소개','이용 안내','개인정보 처리방침','이용약관','문의하기','제휴 안내'] as Tab[]).map(n=><button key={n} onClick={()=>setTab(n)}>{n}</button>)}</div></div><div className="copyright">© 2026 펫고르미. All rights reserved.</div></footer></>}
+const pathToTab=(path:string):Tab=>{
+ const map:Record<string,Tab>={
+  '/':'홈','/dog':'강아지','/cat':'고양이','/situations':'상황별 추천','/compare':'상품 비교','/guides':'반려생활 정보',
+  '/about':'사이트 소개','/usage':'이용 안내','/privacy':'개인정보 처리방침','/terms':'이용약관','/contact':'문의하기','/partnership':'제휴 안내'
+ }
+ return map[path]||'홈'
+}
+const tabToPath=(t:Tab)=>{
+ const map:Record<Tab,string>={'홈':'/','강아지':'/dog','고양이':'/cat','상황별 추천':'/situations','상품 비교':'/compare','반려생활 정보':'/guides','사이트 소개':'/about','이용 안내':'/usage','개인정보 처리방침':'/privacy','이용약관':'/terms','문의하기':'/contact','제휴 안내':'/partnership'}
+ return map[t]
+}
+export default function App(){const [tab,setTab]=useState<Tab>(()=>pathToTab(window.location.pathname));const go=(t:Tab)=>{const path=tabToPath(t);window.history.pushState({},'',path);setTab(t);window.scrollTo({top:0,behavior:'smooth'})};
+ useEffect(()=>{const onPop=()=>setTab(pathToTab(window.location.pathname));window.addEventListener('popstate',onPop);return()=>window.removeEventListener('popstate',onPop)},[]);
+ useEffect(()=>{const titles:Record<Tab,string>={'홈':'펫고르미 | 반려동물 용품 선택 가이드','강아지':'강아지 용품 추천 | 펫고르미','고양이':'고양이 용품 추천 | 펫고르미','상황별 추천':'상황별 반려동물 용품 추천 | 펫고르미','상품 비교':'반려동물 용품 비교 | 펫고르미','반려생활 정보':'반려생활 정보 | 펫고르미','사이트 소개':'사이트 소개 | 펫고르미','이용 안내':'이용 안내 | 펫고르미','개인정보 처리방침':'개인정보 처리방침 | 펫고르미','이용약관':'이용약관 | 펫고르미','문의하기':'문의하기 | 펫고르미','제휴 안내':'제휴 안내 | 펫고르미'};document.title=titles[tab];const canonical=document.querySelector('link[rel="canonical"]')||document.head.appendChild(document.createElement('link'));canonical.setAttribute('rel','canonical');canonical.setAttribute('href',window.location.origin+tabToPath(tab))},[tab]);let content:ReactNode=<Home go={go}/>;if(tab==='강아지')content=<Listing pet="강아지"/>;if(tab==='고양이')content=<Listing pet="고양이"/>;if(tab==='상황별 추천')content=<Situations/>;if(tab==='상품 비교')content=<Compare/>;if(tab==='반려생활 정보')content=<Guides/>;if(['사이트 소개','이용 안내','개인정보 처리방침','이용약관','문의하기','제휴 안내'].includes(tab))content=<InfoPage tab={tab} setTab={setTab}/>;return <><Header tab={tab} setTab={setTab}/>{content}<footer><div className="footer-inner"><div><button className="logo footer-logo" onClick={()=>setTab('홈')}><span>펫</span>고르미</button><p>우리 아이에게 필요한 것을<br/>더 쉽게 고르는 곳</p></div><div className="footer-links">{(['사이트 소개','이용 안내','개인정보 처리방침','이용약관','문의하기','제휴 안내'] as Tab[]).map(n=><button key={n} onClick={()=>setTab(n)}>{n}</button>)}</div></div><div className="copyright">© 2026 펫고르미. All rights reserved.</div></footer></>}
