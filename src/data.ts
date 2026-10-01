@@ -2,15 +2,14 @@ export type Pet = '강아지' | '고양이'
 export type Product = {name:string; pet:Pet; category:string; desc:string; tags:string[]; priceRange?:string; affiliateUrl?:string; imageUrl?:string}
 export const products: Product[] = [
  {name:'강아지 배변패드 고흡수 탈취 애견패드, 1개, 32개입',pet:'강아지',category:'배변·위생',desc:'고흡수와 탈취 기능을 갖춘 강아지 배변패드입니다.',tags:['배변','고흡수','탈취'],priceRange:'상품 페이지에서 확인',affiliateUrl:'https://link.coupang.com/a/huRifkzAKO',imageUrl:'https://image7.coupangcdn.com/image/affiliate/banner/d9ed8d6119f9476f3e9f082ea78608e7@2x.jpg'},
- {name:'강아지 산책용품',pet:'강아지',category:'산책',desc:'목줄·하네스·리드줄을 용도에 맞게 선택하세요.',tags:['산책','외출'],priceRange:'가격대 비교 예정'},
- {name:'강아지 이동장',pet:'강아지',category:'외출',desc:'크기와 통풍, 휴대성을 먼저 확인하세요.',tags:['이동','여행'],priceRange:'가격대 비교 예정'},
- {name:'강아지 급수기',pet:'강아지',category:'급식',desc:'물 섭취량과 세척 편의성, 외출 여부를 함께 고려하세요.',tags:['급수','관리'],priceRange:'가격대 비교 예정'},
- {name:'강아지 장난감',pet:'강아지',category:'놀이·생활',desc:'크기와 내구성, 반려견의 놀이 습관을 확인하세요.',tags:['놀이','내구성'],priceRange:'가격대 비교 예정'},
- {name:'고양이 모래',pet:'고양이',category:'화장실',desc:'응고형·흡수형·두부모래 등의 특징을 비교해보세요.',tags:['화장실','냄새'],priceRange:'가격대 비교 예정'},
- {name:'고양이 스크래처',pet:'고양이',category:'놀이·생활',desc:'설치 공간과 소재, 안정성을 기준으로 골라보세요.',tags:['스크래처','집'],priceRange:'가격대 비교 예정'},
- {name:'고양이 이동장',pet:'고양이',category:'외출',desc:'입구 구조와 통풍, 세척 편의성을 살펴보세요.',tags:['이동','병원'],priceRange:'가격대 비교 예정'},
- {name:'고양이 급수기',pet:'고양이',category:'급식',desc:'용량과 세척, 필터 관리 방식 등을 확인하세요.',tags:['급수','관리'],priceRange:'가격대 비교 예정'},
- {name:'고양이 화장실',pet:'고양이',category:'화장실',desc:'크기와 입구 높이, 청소 편의성을 함께 살펴보세요.',tags:['화장실','청소'],priceRange:'가격대 비교 예정'}
+ {name:'강아지 하네스+리드줄 세트 조절식 당김방지 탈출방지',pet:'강아지',category:'산책',desc:'산책 시 착용감과 조절 범위, 리드줄 포함 여부를 확인하세요.',tags:['산책','하네스','리드줄'],priceRange:'제휴 링크 연결 예정'},
+ {name:'강아지 이동장·캐리어',pet:'강아지',category:'외출',desc:'반려견의 크기에 맞는 내부 공간과 통풍, 휴대성을 확인하세요.',tags:['이동','여행','캐리어'],priceRange:'제휴 링크 연결 예정'},
+ {name:'강아지 급수기 500ML',pet:'강아지',category:'급식',desc:'외출 중 물을 급여하기 편한 휴대용 급수기입니다.',tags:['급수','외출','휴대'],priceRange:'제휴 링크 연결 예정'},
+ {name:'강아지 노즈워크 장난감 15cm',pet:'강아지',category:'놀이·생활',desc:'노즈워크와 놀이를 함께 할 수 있는 장난감입니다.',tags:['노즈워크','놀이','IQ'],priceRange:'제휴 링크 연결 예정'},
+ {name:'탐사 고양이 두부모래 7L',pet:'고양이',category:'화장실',desc:'응고형 두부모래로 고양이 화장실 관리에 사용할 수 있습니다.',tags:['두부모래','응고형','화장실'],priceRange:'제휴 링크 연결 예정'},
+ {name:'네이처펫 고양이 시그니처 숨숨집 스크래처',pet:'고양이',category:'놀이·생활',desc:'스크래칭과 휴식을 함께 고려할 수 있는 숨숨집형 스크래처입니다.',tags:['스크래처','숨숨집','놀이'],priceRange:'제휴 링크 연결 예정'},
+ {name:'고양이 강아지 옥희독희 튼튼백 이동장',pet:'고양이',category:'외출',desc:'외출과 이동 시 반려동물의 크기와 최대 하중을 확인해 선택하세요.',tags:['이동장','외출','캐리어'],priceRange:'제휴 링크 연결 예정'},
+ {name:'조이쥬드 고양이 자동 급수기 정수기 강아지 1.5L',pet:'고양이',category:'급식',desc:'자동 순환 방식과 용량, 세척 편의성을 확인할 수 있는 급수기입니다.',tags:['급수','정수기','1.5L'],priceRange:'제휴 링크 연결 예정'}
 ]
 export const situations = [
  ['초보 보호자','처음 준비하는 필수 용품','처음 반려동물을 맞이했다면 꼭 필요한 품목부터 확인하세요.'],
