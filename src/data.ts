@@ -22,8 +22,6 @@ export const products: Product[] = [
  {name:'캣박스 고양이 스크래쳐 스크래처 숨숨집 박스 하우스, 1) 커튼형, 1개',pet:'고양이',category:'놀이·생활',desc:'스크래칭과 휴식을 함께 고려할 수 있는 숨숨집형 스크래처입니다.',tags:['스크래처','숨숨집','놀이'],checkPoints:['고양이가 몸을 충분히 펼칠 수 있는 크기','스크래칭 면의 재질과 교체 가능 여부','숨숨집과 휴식 공간의 구조'],affiliateUrl:'https://link.coupang.com/a/huVLU8GtyK',imageUrl:'https://image13.coupangcdn.com/image/affiliate/banner/298455fed0b2eeaec6e6cff57bc506b1@2x.jpg'},
  {name:'옥희독희 위로열림 이동장, 아이보리, 1개',pet:'고양이',category:'외출',desc:'외출과 이동 시 반려동물의 크기와 최대 하중을 확인해 선택하세요.',tags:['이동장','외출','캐리어'],checkPoints:['고양이 체형에 맞는 내부 공간','최대 하중과 이동 방식','출입구와 통풍 구조'],affiliateUrl:'https://link.coupang.com/a/hvRkxClU4W',imageUrl:'https://img5c.coupangcdn.com/image/affiliate/banner/d9edbbe3e11ea7e45e28c77ba197834b@2x.jpg'},
  {name:'실리콩 물결 급수기 정수기 반려동물 고양이 강아지 자동급수기, 1개, 화이트',pet:'고양이',category:'급식',desc:'고양이와 강아지가 사용할 수 있는 자동 급수기로 용량과 세척 편의성을 확인하세요.',tags:['급수','정수기','자동급수'],checkPoints:['다묘 가정에 필요한 물통 용량','필터 교체와 세척 편의성','전원 연결 위치와 소음 여부'],affiliateUrl:'https://link.coupang.com/a/huVViieK5c',imageUrl:'https://image12.coupangcdn.com/image/affiliate/banner/207f4be365d1bb80d20bbb29babf4136@2x.jpg'}
-]
-
  {name:'포우장 먼지 안녕 벤토나이트 고양이 모래, 9kg, 2개, 무향',pet:'고양이',category:'화장실',desc:'벤토나이트 모래를 찾는 경우 비교해볼 수 있는 대용량 제품입니다.',tags:['벤토나이트','무향','대용량'],checkPoints:['먼지 발생 정도','응고력과 덩어리 유지력','묶음 구성과 보관 공간'],priceRange:'상품 페이지에서 확인'},
  {name:'냥쌤 더스트 제로 벤토나이트 베이직 언센티드 고양이 모래, 6kg, 3개, 무향',pet:'고양이',category:'화장실',desc:'먼지 관리와 대용량 구성을 함께 비교할 수 있는 벤토나이트 모래입니다.',tags:['벤토나이트','먼지관리','대용량'],checkPoints:['입자와 먼지 발생 정도','응고력과 청소 편의성','묶음 수량과 보관성'],priceRange:'상품 페이지에서 확인'},
  {name:'메디펫 고양이 싹싹 두부모래 가는입자, 3개, 8L, 무향',pet:'고양이',category:'화장실',desc:'가는 입자의 두부모래를 비교할 때 살펴볼 수 있는 제품입니다.',tags:['두부모래','가는입자','무향'],checkPoints:['고양이의 입자 선호도','응고 상태와 부스러짐','폐기 방법과 보관 공간'],priceRange:'상품 페이지에서 확인'},
@@ -33,6 +31,8 @@ export const products: Product[] = [
  {name:'요기쏘 고양이 화장실 모래삽, 블랙, 1개',pet:'고양이',category:'화장실',desc:'고양이 모래삽을 별도로 준비할 때 비교할 수 있는 제품입니다.',tags:['모래삽','청소','화장실'],checkPoints:['삽 구멍 크기','손잡이와 폭','화장실 모서리 접근성'],priceRange:'상품 페이지에서 확인'},
  {name:'옹이네 고양이 벌집모래매트 사각엠보형, 블랙, 1개',pet:'고양이',category:'화장실',desc:'화장실 주변으로 튀어나오는 모래를 관리할 때 비교할 수 있는 매트입니다.',tags:['모래매트','사막화방지','청소'],checkPoints:['화장실 출입구 크기와 호환성','매트 청소 방법','보관과 설치 공간'],priceRange:'상품 페이지에서 확인'},
  {name:'대형 강아지 화장실 대형견 애견 배변판 배변 특대형 애완견',pet:'강아지',category:'배변·위생',desc:'대형견의 배변 공간을 넓게 확보해야 할 때 비교할 수 있는 대형 배변판입니다.',tags:['대형견','배변판','특대형'],checkPoints:['실제 설치 크기','반려견이 움직일 수 있는 공간','세척과 분리 관리 방법'],priceRange:'상품 페이지에서 확인'},
+]
+
 export const situations = [
  ['초보 보호자','처음 준비하는 필수 용품','처음 반려동물을 맞이했다면 꼭 필요한 품목부터 확인하세요.',['매일 사용하는 기본 용품부터 우선순위 정하기','반려동물의 크기와 생활공간에 맞추기','세척·교체 등 관리 방법까지 확인하기']],
  ['좁은 집','공간을 아끼는 용품','크기와 보관성을 중심으로 생활용품을 살펴보세요.',['제품의 실제 설치·사용 공간 확인하기','접거나 겹쳐 보관할 수 있는지 확인하기','청소할 때 주변 공간이 충분한지 살펴보기']],
