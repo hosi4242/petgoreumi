@@ -5,6 +5,7 @@ export type Product = {
  category:string
  desc:string
  tags:string[]
+ suitableFor?:string
  checkPoints:string[]
  priceRange?:string
  affiliateUrl?:string
