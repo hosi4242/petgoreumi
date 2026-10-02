@@ -82,7 +82,37 @@ function Listing({pet}:{pet?:'강아지'|'고양이'}){const [filter,setFilter]=
 function Situations({goSearch}:{goSearch:(q:string)=>void}){const searchTerms:Record<string,string>={'초보 보호자':'배변','좁은 집':'놀이','자주 외출한다면':'외출','가성비를 찾는다면':'배변','강아지 여러 마리':'강아지','고양이 여러 마리':'고양이'};return <main className="page"><div className="page-title"><span className="section-kicker">BY SITUATION</span><h1>상황별 추천</h1><p>우리 집 환경과 생활 방식에 맞춰 필요한 용품을 찾아보세요.</p></div><div className="situation-list">{situations.map(([a,b,c,points],i)=><article key={a} className="situation-large"><div className="num">0{i+1}</div><div><h2>{a}</h2><h3>{b}</h3><p>{c}</p><ul>{points.map(x=><li key={x}><Check/>{x}</li>)}</ul><button className="situation-action" onClick={()=>goSearch(searchTerms[a]||a)}>관련 상품 찾아보기 <ArrowRight size={15}/></button></div></article>)}</div></main>}
 
 function guideSlug(title:string){return title.toLowerCase().replace(/[^가-힣a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
-function Guides({slug}:{slug?:string}){const item=slug?guides.find(([a])=>guideSlug(a)===slug):null; if(item){const [a,b,points]=item;return <main className="page"><div className="page-title"><span className="section-kicker">LIFE GUIDE</span><h1>{a}</h1><p>{b}</p></div><article className="guide-detail"><span>GUIDE</span><h2>고를 때 확인할 기준</h2><ul>{points.map(x=><li key={x}>{x}</li>)}</ul></article><div className="guide-back"><button className="text-link" onClick={()=>{window.history.pushState({},'', '/guides');window.dispatchEvent(new PopStateEvent('popstate'))}}>반려생활 정보 전체 보기 <ArrowRight size={15}/></button></div></main>}return <main className="page"><div className="page-title"><span className="section-kicker">LIFE GUIDE</span><h1>반려생활 정보</h1><p>제품을 사기 전에 알아두면 좋은 선택 기준을 쉽게 정리했습니다.</p></div><div className="guide-list">{guides.map(([a,b,points])=><article className="guide-detail" key={a}><span>GUIDE</span><h2>{a}</h2><p>{b}</p><h3>고를 때 확인할 기준</h3><ul>{points.map(x=><li key={x}>{x}</li>)}</ul><button className="text-link" onClick={()=>{window.history.pushState({},'', '/guides/'+guideSlug(a));window.dispatchEvent(new PopStateEvent('popstate'))}}>자세히 보기 <ArrowRight size={15}/></button></article>)}</div></main>}
+
+const guideProductKeywords:Record<string,string[]> = {
+ '강아지 배변패드 고르는 법':['배변','패드'],
+ '고양이 모래 종류 비교':['두부모래','화장실'],
+ '강아지 산책용품 고르는 법':['하네스','리드줄'],
+ '고양이 화장실 고르는 법':['화장실'],
+ '강아지 하네스 착용법과 사이즈 확인':['하네스'],
+ '강아지 배변패드 교체 주기와 선택 기준':['배변','패드'],
+ '고양이 모래 추천 전에 알아둘 종류별 특징':['두부모래','화장실'],
+ '고양이 모래 교체 주기와 관리 방법':['두부모래','화장실'],
+ '고양이 화장실 위치 고르는 법':['화장실'],
+ '고양이 화장실 크기 고르는 법':['화장실']
+}
+function getGuideProducts(title:string){
+ const keys=guideProductKeywords[title]||[]
+ return products.filter(p=>keys.some(k=>(p.name+p.category+p.desc+p.tags.join('')).includes(k))).slice(0,2)
+}
+function Guides({slug}:{slug?:string}){
+ const item=slug?guides.find(([a])=>guideSlug(a)===slug):null;
+ if(item){
+  const [a,b,points]=item;
+  const guideProducts=getGuideProducts(a);
+  return <main className="page"><div className="page-title"><span className="section-kicker">LIFE GUIDE</span><h1>{a}</h1><p>{b}</p></div>
+   <article className="guide-detail"><span>GUIDE</span><h2>고를 때 확인할 기준</h2><ul>{points.map(x=><li key={x}>{x}</li>)}</ul></article>
+   {guideProducts.length>0&&<section className="guide-products"><div className="guide-products-head"><div><span className="section-kicker">RELATED PRODUCTS</span><h2>이 기준에 맞는 상품 살펴보기</h2><p>위에서 확인한 선택 기준과 관련된 상품을 함께 비교해보세요.</p></div><button className="text-link" onClick={()=>{window.history.pushState({},'', '/compare');window.dispatchEvent(new PopStateEvent('popstate'))}}>전체 상품 비교 <ArrowRight size={15}/></button></div>
+    <div className="guide-product-grid">{guideProducts.map(p=><article className="guide-product" key={p.name}><a href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer" className="guide-product-image"><img src={p.imageUrl} alt={p.name} loading="lazy" decoding="async"/></a><div className="guide-product-body"><span className="eyebrow">{p.pet} · {p.category}</span><h3>{p.name}</h3><p>{p.desc}</p><div className="guide-product-check"><strong>고를 때 확인</strong><span>{p.checkPoints[0]}</span><span>{p.checkPoints[1]}</span></div><a className="text-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer">쿠팡에서 상품 확인 <ExternalLink size={15}/></a></div></article>)}</div><AffiliateNotice/></section>}
+   <div className="guide-back"><button className="text-link" onClick={()=>{window.history.pushState({},'', '/guides');window.dispatchEvent(new PopStateEvent('popstate'))}}>반려생활 정보 전체 보기 <ArrowRight size={15}/></button></div>
+  </main>
+ }
+ return <main className="page"><div className="page-title"><span className="section-kicker">LIFE GUIDE</span><h1>반려생활 정보</h1><p>제품을 사기 전에 알아두면 좋은 선택 기준을 쉽게 정리했습니다.</p></div><div className="guide-list">{guides.map(([a,b,points])=><article className="guide-detail" key={a}><span>GUIDE</span><h2>{a}</h2><p>{b}</p><h3>고를 때 확인할 기준</h3><ul>{points.map(x=><li key={x}>{x}</li>)}</ul><button className="text-link" onClick={()=>{window.history.pushState({},'', '/guides/'+guideSlug(a));window.dispatchEvent(new PopStateEvent('popstate'))}}>자세히 보기 <ArrowRight size={15}/></button></article>)}</div></main>
+}
 
 function Compare(){const [q,setQ]=useState(()=>new URLSearchParams(window.location.search).get('q')||'');const filtered=useMemo(()=>products.filter(p=>(p.name+p.pet+p.category+p.desc+p.tags.join('')+(p.suitableFor||'')+p.checkPoints.join('')).toLowerCase().includes(q.trim().toLowerCase())),[q]);return <main className="page"><div className="page-title"><span className="section-kicker">COMPARE</span><h1>상품 비교</h1><p>궁금한 용품을 검색하고 선택 기준을 확인해보세요.</p></div><div className="compare-search"><Search/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="예: 배변패드, 고양이 모래, 이동장"/>{q&&<button className="clear-search" onClick={()=>setQ('')}>초기화</button>}</div><div className="compare-hint">상품명뿐 아니라 대상, 카테고리, 선택 기준까지 함께 검색됩니다.</div><div className="compare-filters"><button className={!q?'selected':''} onClick={()=>setQ('')}>전체</button>{['강아지','고양이','산책','배변·위생','급식','외출','놀이·생활','화장실'].map(x=><button key={x} onClick={()=>setQ(x)}>{x}</button>)}</div>{filtered.length?<div className="compare-table"><div className="compare-head"><span>용품</span><span>대상</span><span>카테고리</span><span>선택 기준</span><span></span></div>{filtered.map(p=><div className="compare-row" key={p.name}><strong>{p.name}</strong><span>{p.pet}</span><span>{p.category}</span><span><strong className="compare-desc-title">핵심:</strong> {p.desc}<br/><strong className="compare-desc-title">추천:</strong> {p.suitableFor||'상품의 용도와 생활환경을 확인해보세요.'}</span>{p.affiliateUrl?<a className="compare-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer" aria-label="쿠팡에서 상품 보기" title="쿠팡에서 상품 보기"><ExternalLink size={16}/></a>:<button aria-label="상품 정보 보기" title="상품 정보 보기"><ExternalLink size={16}/></button>}</div>)}</div>:<div className="empty">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</div>}<AffiliateNotice/></main>}
 
