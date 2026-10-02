@@ -79,7 +79,7 @@ function Home({go,goCompare,openGuide}:{go:(t:Tab)=>void;goCompare:(q?:string)=>
 
 function Listing({pet}:{pet?:'강아지'|'고양이'}){const [filter,setFilter]=useState('전체');const cats=['전체','산책','배변·위생','급식','외출','놀이·생활','화장실'];const list=products.filter(p=>(!pet||p.pet===pet)&&(filter==='전체'||p.category===filter));return <main className="page"><AffiliateNotice/><div className="page-title"><span className="section-kicker">{pet==='강아지'?'FOR DOG':pet==='고양이'?'FOR CAT':'PRODUCT GUIDE'}</span><h1>{pet?pet+' 용품': '상품 비교'}</h1><p>{pet?pet+'에게 필요한 용품을 선택 기준과 함께 살펴보세요.':'용품별 핵심 기준을 비교하고 필요한 상품을 찾아보세요.'}</p></div><div className="filter-row">{cats.map(x=><button key={x} className={filter===x?'selected':''} onClick={()=>setFilter(x)}>{x}</button>)}</div>{list.length?<div className="product-grid">{list.map(p=><ProductCard key={p.name} p={p}/>)}</div>:<div className="empty">현재 선택한 조건에 맞는 상품 정보가 없습니다. 다른 항목을 선택해보세요.</div>}<AffiliateNotice/></main>}
 
-function Situations({goSearch}:{goSearch:(q:string)=>void}){const searchTerms:Record<string,string>={'초보 보호자':'배변','좁은 집':'놀이','자주 외출한다면':'외출','가성비를 찾는다면':'배변','강아지 여러 마리':'강아지','고양이 여러 마리':'고양이','배변 관리가 어렵다면':'배변','고양이 화장실 관리가 고민이라면':'화장실','산책을 처음 시작한다면':'하네스','소모품을 자주 산다면':'배변','청소 부담을 줄이고 싶다면':'화장실'};return <main className="page"><div className="page-title"><span className="section-kicker">BY SITUATION</span><h1>상황별 추천</h1><p>우리 집 환경과 생활 방식에 맞춰 필요한 용품을 찾아보세요.</p></div><div className="situation-list">{situations.map(([a,b,c,points],i)=><article key={a} className="situation-large"><div className="num">0{i+1}</div><div><h2>{a}</h2><h3>{b}</h3><p>{c}</p><ul>{points.map(x=><li key={x}><Check/>{x}</li>)}</ul><button className="situation-action" onClick={()=>goSearch(searchTerms[a]||a)}>관련 상품 찾아보기 <ArrowRight size={15}/></button></div></article>)}</div></main>}
+function Situations({goSearch}:{goSearch:(q:string)=>void}){const searchTerms:Record<string,string>={'초보 보호자':'배변','좁은 집':'놀이','자주 외출한다면':'외출','가성비를 찾는다면':'배변','강아지 여러 마리':'강아지','고양이 여러 마리':'고양이','배변 관리가 어렵다면':'배변','고양이 화장실 관리가 고민이라면':'화장실','산책을 처음 시작한다면':'하네스','소모품을 자주 산다면':'배변','청소 부담을 줄이고 싶다면':'화장실','치아 관리가 고민이라면':'덴탈껌','눈물 관리가 고민이라면':'기능성 사료','관절 관리용 사료를 찾는다면':'기능성 사료','사료를 잘 먹지 않는다면':'사료토핑','정해진 시간에 급여하고 싶다면':'자동급식','편하게 쉬는 공간을 만들고 싶다면':'방석','목욕용품이 필요하다면':'미용·목욕'};return <main className="page"><div className="page-title"><span className="section-kicker">BY SITUATION</span><h1>상황별 추천</h1><p>우리 집 환경과 생활 방식에 맞춰 필요한 용품을 찾아보세요.</p></div><div className="situation-list">{situations.map(([a,b,c,points],i)=><article key={a} className="situation-large"><div className="num">0{i+1}</div><div><h2>{a}</h2><h3>{b}</h3><p>{c}</p><ul>{points.map(x=><li key={x}><Check/>{x}</li>)}</ul><button className="situation-action" onClick={()=>goSearch(searchTerms[a]||a)}>관련 상품 찾아보기 <ArrowRight size={15}/></button></div></article>)}</div></main>}
 
 function guideSlug(title:string){return title.toLowerCase().replace(/[^가-힣a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 
@@ -98,6 +98,13 @@ const guideProductKeywords:Record<string,string[]> = {
  '강아지 이동장 고르는 법':['이동장'],
  '강아지 자동급수기 고르는 법':['급수기','자동급수기'],
  '강아지 노즈워크 장난감 고르는 법':['노즈워크','놀이'],
+ '강아지 덴탈껌 고르는 법':['덴탈껌','치아관리','구강·치아'],
+ '강아지 기능성 사료 고르는 법':['기능성사료','기능성 사료','눈건강','관절관리'],
+ '강아지 간식과 사료 토핑 고르는 법':['간식','사료토핑','짜먹는간식'],
+ '강아지 자동급식기 고르는 법':['자동급식','급식기'],
+ '강아지 식기 고르는 법':['식기','스테인리스'],
+ '강아지 방석과 휴식공간 고르는 법':['방석','쿠션','침구·방석'],
+ '강아지 목욕 브러쉬 고르는 법':['목욕','샴푸브러쉬','미용·목욕'],
  '고양이 이동장 고르는 법':['이동장'],
  '고양이 급수기 고르는 법':['급수기','자동급수'],
  '고양이 모래 버리는 법':['두부모래','화장실'],
@@ -137,6 +144,13 @@ const relatedGuideMap:Record<string,string[]> = {
  '강아지 이동장 고르는 법':['강아지 산책용품 고르는 법'],
  '강아지 자동급수기 고르는 법':['강아지 배변패드 고르는 법'],
  '강아지 노즈워크 장난감 고르는 법':['강아지 산책용품 고르는 법'],
+ '강아지 덴탈껌 고르는 법':['강아지 간식과 사료 토핑 고르는 법'],
+ '강아지 기능성 사료 고르는 법':['강아지 간식과 사료 토핑 고르는 법','강아지 자동급식기 고르는 법'],
+ '강아지 간식과 사료 토핑 고르는 법':['강아지 덴탈껌 고르는 법','강아지 기능성 사료 고르는 법'],
+ '강아지 자동급식기 고르는 법':['강아지 식기 고르는 법'],
+ '강아지 식기 고르는 법':['강아지 자동급식기 고르는 법'],
+ '강아지 방석과 휴식공간 고르는 법':['강아지 산책용품 고르는 법'],
+ '강아지 목욕 브러쉬 고르는 법':['강아지 산책용품 고르는 법'],
  '고양이 이동장 고르는 법':['고양이 화장실 고르는 법'],
  '고양이 급수기 고르는 법':['고양이 모래 종류 비교'],
  '고양이 모래 버리는 법':['고양이 모래 교체 주기와 관리 방법','고양이 모래 추천 전에 알아둘 종류별 특징'],
@@ -182,7 +196,7 @@ function Guides({slug,openGuide,goCompare}:{slug?:string;openGuide:(slug?:string
  return <main className="page guides-page"><div className="page-title"><span className="section-kicker">LIFE GUIDE</span><h1>반려생활 정보</h1><p>제품을 사기 전에 알아두면 좋은 선택 기준을 쉽게 정리했습니다.</p></div><div className="guide-list">{guides.map(([a,b,points])=><article className="guide-detail" key={a}><span>GUIDE</span><h2>{a}</h2><p>{b}</p><h3>고를 때 확인할 기준</h3><ul>{points.map(x=><li key={x}>{x}</li>)}</ul><a href={`/guides/${guideSlug(a)}`} className="text-link" onClick={(e)=>{e.preventDefault();openGuide(guideSlug(a))}}>자세히 보기 <ArrowRight size={15}/></a></article>)}</div></main>
 }
 
-function Compare(){const [q,setQ]=useState(()=>new URLSearchParams(window.location.search).get('q')||'');const filtered=useMemo(()=>products.filter(p=>(p.name+p.pet+p.category+p.desc+p.tags.join('')+(p.suitableFor||'')+p.checkPoints.join('')).toLowerCase().includes(q.trim().toLowerCase())),[q]);return <main className="page"><AffiliateNotice/><div className="page-title"><span className="section-kicker">COMPARE</span><h1>상품 비교</h1><p>궁금한 용품을 검색하고 선택 기준을 확인해보세요.</p></div><div className="compare-search"><Search/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="예: 배변패드, 고양이 모래, 이동장"/>{q&&<button className="clear-search" onClick={()=>setQ('')}>초기화</button>}</div><div className="compare-hint">상품명뿐 아니라 대상, 카테고리, 선택 기준까지 함께 검색됩니다.</div><div className="compare-filters"><button className={!q?'selected':''} onClick={()=>setQ('')}>전체</button>{['강아지','고양이','산책','배변·위생','급식','외출','놀이·생활','화장실'].map(x=><button key={x} onClick={()=>setQ(x)}>{x}</button>)}</div>{filtered.length?<div className="compare-table"><div className="compare-head"><span>용품</span><span>대상</span><span>카테고리</span><span>선택 기준</span><span></span></div>{filtered.map(p=><div className="compare-row" key={p.name}><strong>{p.name}</strong><span>{p.pet}</span><span>{p.category}</span><span><strong className="compare-desc-title">핵심:</strong> {p.desc}<br/><strong className="compare-desc-title">추천:</strong> {p.suitableFor||'상품의 용도와 생활환경을 확인해보세요.'}</span>{p.affiliateUrl?<a className="compare-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer" aria-label="쿠팡에서 상품 보기" title="쿠팡에서 상품 보기"><ExternalLink size={16}/></a>:<button aria-label="상품 정보 보기" title="상품 정보 보기"><ExternalLink size={16}/></button>}</div>)}</div>:<div className="empty">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</div>}</main>}
+function Compare(){const [q,setQ]=useState(()=>new URLSearchParams(window.location.search).get('q')||'');const filtered=useMemo(()=>products.filter(p=>(p.name+p.pet+p.category+p.desc+p.tags.join('')+(p.suitableFor||'')+p.checkPoints.join('')).toLowerCase().includes(q.trim().toLowerCase())),[q]);return <main className="page"><AffiliateNotice/><div className="page-title"><span className="section-kicker">COMPARE</span><h1>상품 비교</h1><p>궁금한 용품을 검색하고 선택 기준을 확인해보세요.</p></div><div className="compare-search"><Search/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="예: 배변패드, 고양이 모래, 이동장"/>{q&&<button className="clear-search" onClick={()=>setQ('')}>초기화</button>}</div><div className="compare-hint">상품명뿐 아니라 대상, 카테고리, 선택 기준까지 함께 검색됩니다.</div><div className="compare-filters"><button className={!q?'selected':''} onClick={()=>setQ('')}>전체</button>{['강아지','고양이','산책','배변·위생','급식','외출','놀이·생활','화장실','사료','간식','기능성 사료','구강·치아','식기','침구·방석','미용·목욕'].map(x=><button key={x} onClick={()=>setQ(x)}>{x}</button>)}</div>{filtered.length?<div className="compare-table"><div className="compare-head"><span>용품</span><span>대상</span><span>카테고리</span><span>선택 기준</span><span></span></div>{filtered.map(p=><div className="compare-row" key={p.name}><strong>{p.name}</strong><span>{p.pet}</span><span>{p.category}</span><span><strong className="compare-desc-title">핵심:</strong> {p.desc}<br/><strong className="compare-desc-title">추천:</strong> {p.suitableFor||'상품의 용도와 생활환경을 확인해보세요.'}</span>{p.affiliateUrl?<a className="compare-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer" aria-label="쿠팡에서 상품 보기" title="쿠팡에서 상품 보기"><ExternalLink size={16}/></a>:<button aria-label="상품 정보 보기" title="상품 정보 보기"><ExternalLink size={16}/></button>}</div>)}</div>:<div className="empty">검색 결과가 없습니다. 다른 키워드로 검색해보세요.</div>}</main>}
 
 function InfoPage({tab,go}:{tab:Tab;go:(t:Tab)=>void}){const data:Record<string,{title:string;body:string[]}>={ 
  '사이트 소개':{title:'사이트 소개',body:['펫고르미는 강아지와 고양이 용품을 고를 때 필요한 기준을 쉽게 정리하는 반려생활 정보 사이트입니다.','특정 상품만을 일방적으로 권하기보다 용도와 생활환경에 따라 무엇을 확인해야 하는지 비교할 수 있도록 정보를 제공합니다.','상품 정보와 가격은 판매처의 실제 페이지에서 최종 확인하시기 바랍니다.']},
