@@ -9,3 +9,5 @@ footer{background:#27342e;color:#dce4df}.footer-inner{max-width:1132px;margin:au
 @media(max-width:480px){.product-grid{grid-template-columns:1fr}.product-image-link,.product-image,.product-icon{height:280px}.situation-grid{grid-template-columns:1fr}.search button{padding:11px 14px}.search input{min-width:0}.hero h1 br{display:none}}
 
 .empty{padding:45px 20px;text-align:center;border:1px dashed var(--line);border-radius:15px;color:var(--muted);background:#fafbfa}.back-link{display:flex;align-items:center;gap:3px;color:var(--green);font-weight:700;font-size:13px;padding:0;margin-bottom:20px}.info-page .page-title{padding-bottom:25px}.info-card{border:1px solid var(--line);border-radius:18px;background:#fff;padding:30px;line-height:1.9;color:#59665f}.info-card p{margin:0 0 18px}.info-card p:last-child{margin-bottom:0}
+
+.situation-action{margin-top:14px;border:0;background:var(--mint);color:var(--green);border-radius:9px;padding:8px 11px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer}.situation-action:hover{filter:brightness(.98)}
