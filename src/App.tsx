@@ -14,7 +14,7 @@ function Header({tab,go}:{tab:Tab;go:(t:Tab)=>void}) {
  </div></header>
 }
 
-function SeoSchema({tab,guideItem}:{tab:Tab;guideItem?:readonly [string,string,readonly string[]]}) {
+function SeoSchema({tab,guideItem}:{tab:Tab;guideItem?:readonly [string,string,readonly string[],string,string,string]}) {
  const base=window.location.origin
  const data:any[]=[]
  if(tab==='홈'){
