@@ -99,6 +99,22 @@ function getGuideProducts(title:string){
  const keys=guideProductKeywords[title]||[]
  return products.filter(p=>keys.some(k=>(p.name+p.category+p.desc+p.tags.join('')).includes(k))).slice(0,2)
 }
+const relatedGuideMap:Record<string,string[]> = {
+ '강아지 배변패드 고르는 법':['강아지 배변패드 교체 주기와 선택 기준'],
+ '고양이 모래 종류 비교':['고양이 모래 추천 전에 알아둘 종류별 특징','고양이 모래 교체 주기와 관리 방법','고양이 화장실 고르는 법'],
+ '강아지 산책용품 고르는 법':['강아지 하네스 착용법과 사이즈 확인'],
+ '고양이 화장실 고르는 법':['고양이 화장실 크기 고르는 법','고양이 화장실 위치 고르는 법','고양이 모래 종류 비교'],
+ '강아지 하네스 착용법과 사이즈 확인':['강아지 산책용품 고르는 법'],
+ '강아지 배변패드 교체 주기와 선택 기준':['강아지 배변패드 고르는 법'],
+ '고양이 모래 추천 전에 알아둘 종류별 특징':['고양이 모래 종류 비교','고양이 모래 교체 주기와 관리 방법'],
+ '고양이 모래 교체 주기와 관리 방법':['고양이 모래 종류 비교','고양이 화장실 고르는 법'],
+ '고양이 화장실 위치 고르는 법':['고양이 화장실 고르는 법','고양이 화장실 크기 고르는 법'],
+ '고양이 화장실 크기 고르는 법':['고양이 화장실 고르는 법','고양이 화장실 위치 고르는 법']
+}
+function getRelatedGuides(title:string){
+ const names=relatedGuideMap[title]||[]
+ return names.map(name=>guides.find(g=>g[0]===name)).filter(Boolean) as typeof guides[number][]
+}
 function Guides({slug}:{slug?:string}){
  const item=slug?guides.find(([a])=>guideSlug(a)===slug):null;
  if(item){
@@ -108,6 +124,7 @@ function Guides({slug}:{slug?:string}){
    <article className="guide-detail"><span>GUIDE</span><h2>고를 때 확인할 기준</h2><ul>{points.map(x=><li key={x}>{x}</li>)}</ul></article>
    {guideProducts.length>0&&<section className="guide-products"><div className="guide-products-head"><div><span className="section-kicker">RELATED PRODUCTS</span><h2>이 기준에 맞는 상품 살펴보기</h2><p>위에서 확인한 선택 기준과 관련된 상품을 함께 비교해보세요.</p></div><button className="text-link" onClick={()=>{window.history.pushState({},'', '/compare');window.dispatchEvent(new PopStateEvent('popstate'))}}>전체 상품 비교 <ArrowRight size={15}/></button></div>
     <div className="guide-product-grid">{guideProducts.map(p=><article className="guide-product" key={p.name}><a href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer" className="guide-product-image"><img src={p.imageUrl} alt={p.name} loading="lazy" decoding="async"/></a><div className="guide-product-body"><span className="eyebrow">{p.pet} · {p.category}</span><h3>{p.name}</h3><p>{p.desc}</p><div className="guide-product-check"><strong>고를 때 확인</strong><span>{p.checkPoints[0]}</span><span>{p.checkPoints[1]}</span></div><a className="text-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer">쿠팡에서 상품 확인 <ExternalLink size={15}/></a></div></article>)}</div><AffiliateNotice/></section>}
+   {getRelatedGuides(a).length>0&&<section className="related-guides"><div className="related-guides-head"><span className="section-kicker">RELATED GUIDES</span><h2>함께 보면 좋은 정보</h2></div><div className="related-guide-grid">{getRelatedGuides(a).map(([title,desc])=><button className="related-guide-card" key={title} onClick={()=>{window.history.pushState({},'', '/guides/'+guideSlug(title));window.dispatchEvent(new PopStateEvent('popstate'));window.scrollTo({top:0,behavior:'smooth'})}}><strong>{title}</strong><span>{desc}</span><em>자세히 보기 <ArrowRight size={14}/></em></button>)}</div></section>}
    <div className="guide-back"><button className="text-link" onClick={()=>{window.history.pushState({},'', '/guides');window.dispatchEvent(new PopStateEvent('popstate'))}}>반려생활 정보 전체 보기 <ArrowRight size={15}/></button></div>
   </main>
  }
