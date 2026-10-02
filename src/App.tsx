@@ -14,8 +14,56 @@ function Header({tab,go}:{tab:Tab;go:(t:Tab)=>void}) {
  </div></header>
 }
 
-function SeoSchema({tab,guideItem}:{tab:Tab;guideItem?:readonly [string,string,readonly string[]]}){const base=window.location.origin;const data:any[]=[];if(tab==='홈'){data.push({"@context":"https://schema.org","@type":"Organization","name":"펫고르미","url":base});data.push({"@context":"https://schema.org","@type":"WebSite","name":"펫고르미","url":base,"description":"강아지와 고양이 용품을 조건별로 비교하고 선택 기준을 제공하는 반려생활 정보 사이트"});}if(guideItem){data.push({"@context":"https://schema.org","@type":"Article","headline":guideItem[0],"description":guideItem[1],"url":window.location.href,"mainEntityOfPage":{"@type":"WebPage","@id":window.location.href},"isPartOf":{"@type":"WebSite","name":"펫고르미","url":base},"author":{"@type":"Organization","name":"펫고르미"}});data.push({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":base+"/"},{"@type":"ListItem","position":2,"name":"반려생활 정보","item":base+"/guides"},{"@type":"ListItem","position":3,"name":guideItem[0]}]);}if(!guideItem&&tab!=='홈'){data.push({"@context":"https://schema.org","@type":"WebPage","name":document.title,"url":window.location.href,"isPartOf":{"@type":"WebSite","name":"펫고르미","url":base}});}return <>{data.map((item,i)=><script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(item)}}/>)}</>}
-
+function SeoSchema({tab,guideItem}:{tab:Tab;guideItem?:readonly [string,string,readonly string[]]}) {
+ const base=window.location.origin
+ const data:any[]=[]
+ if(tab==='홈'){
+  data.push({
+   "@context":"https://schema.org",
+   "@type":"Organization",
+   "name":"펫고르미",
+   "url":base
+  })
+  data.push({
+   "@context":"https://schema.org",
+   "@type":"WebSite",
+   "name":"펫고르미",
+   "url":base,
+   "description":"강아지와 고양이 용품을 조건별로 비교하고 선택 기준을 제공하는 반려생활 정보 사이트"
+  })
+ }
+ if(guideItem){
+  data.push({
+   "@context":"https://schema.org",
+   "@type":"Article",
+   "headline":guideItem[0],
+   "description":guideItem[1],
+   "url":window.location.href,
+   "mainEntityOfPage":{"@type":"WebPage","@id":window.location.href},
+   "isPartOf":{"@type":"WebSite","name":"펫고르미","url":base},
+   "author":{"@type":"Organization","name":"펫고르미"}
+  })
+  data.push({
+   "@context":"https://schema.org",
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"홈","item":base+"/"},
+    {"@type":"ListItem","position":2,"name":"반려생활 정보","item":base+"/guides"},
+    {"@type":"ListItem","position":3,"name":guideItem[0]}
+   ]
+  })
+ }
+ if(!guideItem && tab!=='홈'){
+  data.push({
+   "@context":"https://schema.org",
+   "@type":"WebPage",
+   "name":document.title,
+   "url":window.location.href,
+   "isPartOf":{"@type":"WebSite","name":"펫고르미","url":base}
+  })
+ }
+ return <>{data.map((item,i)=><script key={i} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(item)}}/>)}</>
+}
 function AffiliateNotice(){return <div className="notice">※ 펫고르미는 상품 선택에 도움이 되는 정보를 제공하며, 쿠팡 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.</div>}
 
 function ProductCard({p,onCompare}:{p:typeof products[number];onCompare?:()=>void}){return <article className="product-card">{p.imageUrl?(p.affiliateUrl?<a className="product-image-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer"><img className="product-image" src={p.imageUrl} alt={p.name} decoding="async"/></a>:<img className="product-image" src={p.imageUrl} alt={p.name} decoding="async"/>):<div className="product-icon">{p.pet==='강아지'?<Dog/>:<Cat/>}</div>}<div><span className="eyebrow">{p.pet} · {p.category}</span><h3>{p.name}</h3><p>{p.desc}</p>{p.suitableFor&&<div className="fit"><strong>이런 경우 살펴보세요</strong><span>{p.suitableFor}</span></div>}<div className="check-points"><strong>고를 때 확인</strong><ul>{p.checkPoints.slice(0,3).map(x=><li key={x}>{x}</li>)}</ul></div><div className="tags">{p.tags.map(t=><span key={t}>{t}</span>)}</div>{p.affiliateUrl?<a className="text-link" href={p.affiliateUrl} target="_blank" rel="sponsored noopener noreferrer">쿠팡에서 바로 보기 <ExternalLink size={15}/></a>:<button className="text-link" onClick={onCompare}>상품 정보 보기 <ArrowRight size={15}/></button>}</div></article>}
