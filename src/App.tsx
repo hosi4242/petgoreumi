@@ -96,7 +96,8 @@ const guideProductKeywords:Record<string,string[]> = {
  '고양이 화장실 크기 고르는 법':['화장실'],
  '고양이 스크래쳐 고르는 법':['스크래쳐','스크래처'],
  '강아지 이동장 고르는 법':['이동장'],
- '강아지 자동급수기 고르는 법':['급수기','자동급수기']
+ '강아지 자동급수기 고르는 법':['급수기','자동급수기'],
+ '강아지 노즈워크 장난감 고르는 법':['노즈워크','놀이']
 }
 function getGuideProducts(title:string){
  const keys=guideProductKeywords[title]||[]
@@ -115,7 +116,8 @@ const relatedGuideMap:Record<string,string[]> = {
  '고양이 화장실 크기 고르는 법':['고양이 화장실 고르는 법','고양이 화장실 위치 고르는 법'],
  '고양이 스크래쳐 고르는 법':['고양이 화장실 고르는 법'],
  '강아지 이동장 고르는 법':['강아지 산책용품 고르는 법'],
- '강아지 자동급수기 고르는 법':['강아지 배변패드 고르는 법']
+ '강아지 자동급수기 고르는 법':['강아지 배변패드 고르는 법'],
+ '강아지 노즈워크 장난감 고르는 법':['강아지 산책용품 고르는 법']
 }
 function getRelatedGuides(title:string){
  const names=relatedGuideMap[title]||[]
