@@ -74,7 +74,7 @@ function Home({go}:{go:(t:Tab)=>void}){const [search,setSearch]=useState('');con
  <section className="section"><div className="section-head"><div><span className="section-kicker">PET CATEGORY</span><h2>반려동물별로 찾아보기</h2></div></div><div className="pet-grid"><button className="pet-card dog" onClick={()=>go('강아지')}><Dog/><div><span>FOR DOG</span><h3>강아지 용품</h3><p>산책 · 배변 · 급식 · 이동 · 놀이</p></div><ArrowRight/></button><button className="pet-card cat" onClick={()=>go('고양이')}><Cat/><div><span>FOR CAT</span><h3>고양이 용품</h3><p>화장실 · 급식 · 스크래처 · 이동 · 놀이</p></div><ArrowRight/></button></div></section>
  <section className="section soft"><div className="section-head"><div><span className="section-kicker">BY SITUATION</span><h2>이런 상황이라면</h2></div><button onClick={()=>go('상황별 추천')} className="more">전체 보기 <ArrowRight size={16}/></button></div><div className="situation-grid">{situations.map(([a,b,c])=><button className="situation" key={a} onClick={()=>go('상황별 추천')}><strong>{a}</strong><span>{b}</span><small>{c}</small></button>)}</div></section>
  <section className="section"><div className="section-head"><div><span className="section-kicker">POPULAR GUIDE</span><h2>많이 찾는 용품</h2></div><button onClick={()=>go('상품 비교')} className="more">상품 비교 <ArrowRight size={16}/></button></div><div className="product-grid">{products.slice(0,6).map(p=><ProductCard key={p.name} p={p} onCompare={()=>go('상품 비교')}/>)}</div><AffiliateNotice/></section>
- <section className="section soft"><div className="section-head"><div><span className="section-kicker">RECENT GUIDES</span><h2>반려생활 정보</h2></div><button onClick={()=>go('반려생활 정보')} className="more">전체 보기 <ArrowRight size={16}/></button></div><div className="guide-grid">{guides.map(([a,b])=><article className="guide" key={a}><span>GUIDE</span><h3>{a}</h3><p>{b}</p><button onClick={()=>go('반려생활 정보')}>자세히 보기 <ArrowRight size={15}/></button></article>)}</div></section>
+ <section className="section soft"><div className="section-head"><div><span className="section-kicker">RECENT GUIDES</span><h2>반려생활 정보</h2></div><button onClick={()=>go('반려생활 정보')} className="more">전체 보기 <ArrowRight size={16}/></button></div><div className="guide-grid">{guides.map(([a,b])=><article className="guide" key={a}><span>GUIDE</span><h3>{a}</h3><p>{b}</p><button onClick={()=>{window.history.pushState({},'', '/guides/'+guideSlug(a));window.dispatchEvent(new PopStateEvent('popstate'));window.scrollTo({top:0,behavior:'smooth'})}}>자세히 보기 <ArrowRight size={15}/></button></article>)}</div></section>
  </main>}
 
 function Listing({pet}:{pet?:'강아지'|'고양이'}){const [filter,setFilter]=useState('전체');const cats=['전체','산책','배변·위생','급식','외출','놀이·생활','화장실'];const list=products.filter(p=>(!pet||p.pet===pet)&&(filter==='전체'||p.category===filter));return <main className="page"><div className="page-title"><span className="section-kicker">{pet==='강아지'?'FOR DOG':pet==='고양이'?'FOR CAT':'PRODUCT GUIDE'}</span><h1>{pet?pet+' 용품': '상품 비교'}</h1><p>{pet?pet+'에게 필요한 용품을 선택 기준과 함께 살펴보세요.':'용품별 핵심 기준을 비교하고 필요한 상품을 찾아보세요.'}</p></div><div className="filter-row">{cats.map(x=><button key={x} className={filter===x?'selected':''} onClick={()=>setFilter(x)}>{x}</button>)}</div>{list.length?<div className="product-grid">{list.map(p=><ProductCard key={p.name} p={p}/>)}</div>:<div className="empty">현재 선택한 조건에 맞는 상품 정보가 없습니다. 다른 항목을 선택해보세요.</div>}<AffiliateNotice/></main>}
@@ -97,7 +97,9 @@ const guideProductKeywords:Record<string,string[]> = {
  '고양이 스크래쳐 고르는 법':['스크래쳐','스크래처'],
  '강아지 이동장 고르는 법':['이동장'],
  '강아지 자동급수기 고르는 법':['급수기','자동급수기'],
- '강아지 노즈워크 장난감 고르는 법':['노즈워크','놀이']
+ '강아지 노즈워크 장난감 고르는 법':['노즈워크','놀이'],
+ '고양이 이동장 고르는 법':['이동장'],
+ '고양이 급수기 고르는 법':['급수기','자동급수']
 }
 function getGuideProducts(title:string){
  const keys=guideProductKeywords[title]||[]
@@ -117,7 +119,9 @@ const relatedGuideMap:Record<string,string[]> = {
  '고양이 스크래쳐 고르는 법':['고양이 화장실 고르는 법'],
  '강아지 이동장 고르는 법':['강아지 산책용품 고르는 법'],
  '강아지 자동급수기 고르는 법':['강아지 배변패드 고르는 법'],
- '강아지 노즈워크 장난감 고르는 법':['강아지 산책용품 고르는 법']
+ '강아지 노즈워크 장난감 고르는 법':['강아지 산책용품 고르는 법'],
+ '고양이 이동장 고르는 법':['고양이 화장실 고르는 법'],
+ '고양이 급수기 고르는 법':['고양이 모래 종류 비교']
 }
 function getRelatedGuides(title:string){
  const names=relatedGuideMap[title]||[]
@@ -146,7 +150,7 @@ function InfoPage({tab,go}:{tab:Tab;go:(t:Tab)=>void}){const data:Record<string,
  '이용 안내':{title:'이용 안내',body:['카테고리에서 강아지·고양이 용품을 살펴보거나 상품 비교에서 필요한 키워드를 검색할 수 있습니다.','펫고르미의 상품 정보는 선택을 돕기 위한 참고 자료이며, 실제 판매 여부·가격·배송·재고 등은 판매처에서 확인해야 합니다.']},
  '개인정보 처리방침':{title:'개인정보 처리방침',body:['현재 펫고르미는 별도의 회원가입 기능을 제공하지 않으며, 이름·전화번호 등 회원정보를 직접 수집하는 기능을 두고 있지 않습니다.','향후 문의 폼, 방문자 통계, 광고 또는 제휴 서비스가 추가되면 해당 기능에 맞춰 개인정보 처리방침을 업데이트할 예정입니다.','외부 서비스가 정보를 처리하는 경우 각 서비스의 정책도 함께 확인하시기 바랍니다.']},
  '이용약관':{title:'이용약관',body:['펫고르미가 제공하는 콘텐츠는 반려생활과 상품 선택을 돕기 위한 일반적인 정보입니다.','상품의 구매 여부와 사용 적합성은 이용자가 상품 상세정보와 제조·판매처의 안내를 확인하여 판단해야 합니다.','사이트 콘텐츠를 무단 복제하거나 상업적으로 재배포하는 행위는 제한될 수 있습니다.']},
- '문의하기':{title:'문의하기',body:['사이트 이용 중 오류나 콘텐츠 관련 문의가 있다면 아래 이메일로 연락해 주세요.','이메일: contact@petgoreumi.com','※ 실제 도메인과 이메일 주소가 확정되면 이 주소를 운영 이메일로 변경하세요.']},
+ '문의하기':{title:'문의하기',body:['사이트 이용 중 오류나 콘텐츠 관련 문의를 준비하고 있습니다.','현재는 별도의 문의 접수 이메일을 운영하지 않고 있습니다.','운영 이메일이 확정되면 이 페이지에 공식 문의 방법을 안내하겠습니다.']},
  '제휴 안내':{title:'제휴 안내',body:['펫고르미는 반려동물 용품에 관한 정보와 비교 콘텐츠를 제공하고 제휴 링크를 통해 수익을 얻을 수 있는 구조로 운영됩니다.','제휴 링크가 연결된 상품 영역에는 제휴 사실을 알아보기 쉽게 표시하고 있습니다.','상품별 제휴 링크가 연결된 경우 제휴 사실을 확인할 수 있도록 안내 문구를 함께 표시합니다.']}
 };const d=data[tab];return <main className="page info-page"><button className="back-link" onClick={()=>go('홈')}><ChevronLeft size={17}/> 홈으로 돌아가기</button><div className="page-title"><span className="section-kicker">PETGOREUMI</span><h1>{d.title}</h1></div><div className="info-card">{d.body.map((x,i)=><p key={i}>{x}</p>)}</div></main>}
 
