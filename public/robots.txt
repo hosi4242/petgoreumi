@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petgoreumi.pages.dev/sitemap.xml
+Sitemap: https://petgoreumi.hosi4242.workers.dev/sitemap.xml
