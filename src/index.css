@@ -34,3 +34,7 @@ footer{background:#27342e;color:#dce4df}.footer-inner{max-width:1132px;margin:au
 
 @media(max-width:900px){.guide-list{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.guide-list{grid-template-columns:1fr}.guide-list .guide-detail{padding:22px 20px}.guides-page-head{display:block}}
+
+.guides-page{padding-top:54px}
+.guides-page .page-title{padding-bottom:30px}
+.guides-page .page-title h1{margin-bottom:10px}
