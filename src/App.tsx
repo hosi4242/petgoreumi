@@ -209,7 +209,13 @@ function InfoPage({tab,go}:{tab:Tab;go:(t:Tab)=>void}){const data:Record<string,
  '제휴 안내':{title:'제휴 안내',body:['펫고르미는 반려동물 용품에 관한 정보와 비교 콘텐츠를 제공하고 제휴 링크를 통해 수익을 얻을 수 있는 구조로 운영됩니다.','제휴 링크가 연결된 상품 영역에는 제휴 사실을 알아보기 쉽게 표시하고 있습니다.','상품별 제휴 링크가 연결된 경우 제휴 사실을 확인할 수 있도록 안내 문구를 함께 표시합니다.']}
 };const d=data[tab];return <main className="page info-page"><button className="back-link" onClick={()=>go('홈')}><ChevronLeft size={17}/> 홈으로 돌아가기</button><div className="page-title"><span className="section-kicker">PETGOREUMI</span><h1>{d.title}</h1></div><div className="info-card">{d.body.map((x,i)=><p key={i}>{x}</p>)}</div></main>}
 
-const getGuideSlugFromPath=(path:string)=>{\n const raw=path.startsWith('/guides/')?path.slice(8):''\n if(!raw)return ''\n try{return decodeURIComponent(raw).replace(/\\/$/,'')}catch{return raw.replace(/\\/$/,'')}\n}\n\nconst pathToTab=(path:string):Tab=>{
+const getGuideSlugFromPath=(path:string)=>{ 
+ const raw=path.startsWith('/guides/')?path.slice(8):''
+ if(!raw)return ''
+ try{return decodeURIComponent(raw).replace(/\/$/,'')}catch{return raw.replace(/\/$/,'')}
+}
+
+const pathToTab=(path:string):Tab=>{
  if(path.startsWith('/guides/')) return '반려생활 정보'
  const map:Record<string,Tab>={
   '/':'홈','/dog':'강아지','/cat':'고양이','/situations':'상황별 추천','/compare':'상품 비교','/guides':'반려생활 정보',
